@@ -1,0 +1,8 @@
+jwt:
+  secret: dGVzdFNlY3JldEZvclVuaXRUZXN0aW5nT25seTEyMzQ1Njc4
+
+services:
+  driver:
+    base-url: http://localhost:9999  # not called in controller tests
+  fare:
+    base-url: http://localhost:9998
