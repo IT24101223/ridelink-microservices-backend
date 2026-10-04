@@ -1,0 +1,319 @@
+{
+  "info": {
+    "_postman_id": "driver-service-collection-v2-1",
+    "name": "Driver Service API",
+    "description": "Postman collection for the ride-sharing driver profile microservice.",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "Create driver profile - success",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"driverId\": \"driver-101\",\n  \"licenseNumber\": \"DL-12345\",\n  \"serviceArea\": \"Downtown\",\n  \"availabilityStatus\": \"OFFLINE\",\n  \"vehicle\": {\n    \"model\": \"Toyota Corolla\",\n    \"vehicleType\": \"CAR\",\n    \"licensePlate\": \"ABC-123\",\n    \"capacity\": 4,\n    \"color\": \"Blue\"\n  },\n  \"currentLocation\": {\n    \"latitude\": 40.7128,\n    \"longitude\": -74.0060,\n    \"address\": \"123 Main St, Downtown\"\n  }\n}"
+        },
+        "url": {
+          "raw": "http://localhost:8082/api/drivers",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8082",
+          "path": [
+            "api",
+            "drivers"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Create driver profile - validation error",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"driverId\": \"\",\n  \"licenseNumber\": \"\",\n  \"serviceArea\": \"\",\n  \"vehicle\": {\n    \"model\": \"\",\n    \"vehicleType\": \"CAR\",\n    \"licensePlate\": \"\",\n    \"capacity\": null,\n    \"color\": \"\"\n  }\n}"
+        },
+        "url": {
+          "raw": "http://localhost:8082/api/drivers",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8082",
+          "path": [
+            "api",
+            "drivers"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Get driver profile - success",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:8082/api/drivers/driver-101",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8082",
+          "path": [
+            "api",
+            "drivers",
+            "driver-101"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Get driver profile - not found",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:8082/api/drivers/driver-unknown",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8082",
+          "path": [
+            "api",
+            "drivers",
+            "driver-unknown"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Update driver profile - success",
+      "request": {
+        "method": "PUT",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"serviceArea\": \"Midtown\",\n  \"vehicle\": {\n    \"model\": \"Honda Civic\",\n    \"vehicleType\": \"CAR\",\n    \"licensePlate\": \"XYZ-999\",\n    \"capacity\": 5,\n    \"color\": \"Silver\"\n  }\n}"
+        },
+        "url": {
+          "raw": "http://localhost:8082/api/drivers/driver-101",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8082",
+          "path": [
+            "api",
+            "drivers",
+            "driver-101"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Update driver profile - validation error",
+      "request": {
+        "method": "PUT",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"serviceArea\": \"\",\n  \"vehicle\": {\n    \"model\": \"\",\n    \"vehicleType\": \"\",\n    \"licensePlate\": \"\",\n    \"capacity\": null,\n    \"color\": \"\"\n  }\n}"
+        },
+        "url": {
+          "raw": "http://localhost:8082/api/drivers/driver-101",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8082",
+          "path": [
+            "api",
+            "drivers",
+            "driver-101"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Update availability - success",
+      "request": {
+        "method": "PATCH",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:8082/api/drivers/driver-101/availability?status=AVAILABLE",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8082",
+          "path": [
+            "api",
+            "drivers",
+            "driver-101",
+            "availability"
+          ],
+          "query": [
+            {
+              "key": "status",
+              "value": "AVAILABLE"
+            }
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Update availability - bad request",
+      "request": {
+        "method": "PATCH",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:8082/api/drivers/driver-101/availability?status=INVALID",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8082",
+          "path": [
+            "api",
+            "drivers",
+            "driver-101",
+            "availability"
+          ],
+          "query": [
+            {
+              "key": "status",
+              "value": "INVALID"
+            }
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Update location - success",
+      "request": {
+        "method": "PATCH",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"latitude\": 40.7420,\n  \"longitude\": -73.9875,\n  \"address\": \"456 Midtown Ave, Midtown\"\n}"
+        },
+        "url": {
+          "raw": "http://localhost:8082/api/drivers/driver-101/location",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8082",
+          "path": [
+            "api",
+            "drivers",
+            "driver-101",
+            "location"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Get available drivers - success",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:8082/api/drivers/available?serviceArea=Downtown&vehicleType=CAR",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8082",
+          "path": [
+            "api",
+            "drivers",
+            "available"
+          ],
+          "query": [
+            {
+              "key": "serviceArea",
+              "value": "Downtown"
+            },
+            {
+              "key": "vehicleType",
+              "value": "CAR"
+            }
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Get available drivers - invalid vehicle type",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:8082/api/drivers/available?serviceArea=Downtown&vehicleType=TRUCK",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8082",
+          "path": [
+            "api",
+            "drivers",
+            "available"
+          ],
+          "query": [
+            {
+              "key": "serviceArea",
+              "value": "Downtown"
+            },
+            {
+              "key": "vehicleType",
+              "value": "TRUCK"
+            }
+          ]
+        }
+      },
+      "response": []
+    }
+  ]
+}
