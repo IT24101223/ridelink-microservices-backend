@@ -1,0 +1,43 @@
+server:
+  port: 8083
+
+spring:
+  config:
+    import: optional:file:.env[.properties]
+
+  application:
+    name: ride-management-service
+
+  data:
+    mongodb:
+      uri: ${MONGODB_URI:${SPRING_DATA_MONGODB_URI:${MONGO_URI}}}
+      database: ride_management
+      uuid-representation: standard
+
+# ── JWT ───────────────────────────────────────────────────────────────
+# Secret is injected via environment variable JWT_SECRET.
+# Never put a real secret here; see .env.example.
+jwt:
+  secret: ${JWT_SECRET:dGVzdFNlY3JldEZvclVuaXRUZXN0aW5nT25seTEyMzQ1Njc4}
+  # Account Service signs tokens; we only validate.
+
+# ── Downstream service URLs ───────────────────────────────────────────
+services:
+  driver:
+    base-url: ${DRIVER_SERVICE_URL:http://localhost:8082}
+  fare:
+    base-url: ${FARE_SERVICE_URL:http://localhost:8084}
+
+# ── SpringDoc / Swagger ───────────────────────────────────────────────
+springdoc:
+  swagger-ui:
+    path: /swagger-ui.html
+    tags-sorter: alpha
+  api-docs:
+    path: /v3/api-docs
+
+# ── Logging ───────────────────────────────────────────────────────────
+logging:
+  level:
+    com.ridelink.ride: DEBUG
+    org.springframework.security: INFO

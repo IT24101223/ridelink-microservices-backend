@@ -1,0 +1,12 @@
+# ── application-stub.yml ──────────────────────────────────────────────
+# Activate with: --spring.profiles.active=stub
+# When active, fake implementations replace real downstream HTTP clients.
+# Ride data is still stored in the configured MongoDB database.
+
+# JWT_SECRET must still be set; use any 32-char base64 string for demos.
+jwt:
+  secret: ${JWT_SECRET:c3R1YlNlY3JldEZvckRlbW9Pbmx5RG9Ob3RVc2VJblByb2Q=}
+
+logging:
+  level:
+    com.ridelink.ride.client: DEBUG
